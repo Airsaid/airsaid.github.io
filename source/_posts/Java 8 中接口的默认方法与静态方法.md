@@ -1,5 +1,6 @@
 ---
 title: Java 8 中接口的默认方法与静态方法
+permalink: Java8-Interface-DefaultMethod-StaticMethod
 date: 2018-02-01 15:48:19
 categories:
     - Java
