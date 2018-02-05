@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android 约束布局（ConstraintLayout）详解 | Airsaid&#39;s Blog | 为写出优雅的代码而努力</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,ConstraintLayout">
+    <meta name="description" content="本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解">
+<meta name="keywords" content="Android,ConstraintLayout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 约束布局（ConstraintLayout）详解">
+<meta property="og:url" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/index.html">
+<meta property="og:site_name" content="Airsaid&#39;s Blog">
+<meta property="og:description" content="本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/警告提示.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/正常情况.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/转换代码.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/蓝图效果.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/删除该控件上所有约束.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/编辑基线.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/添加约束.gif">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/设置默认margin.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/添加约束（约束对象为另一个控件）.gif">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/删除指定的单个约束.gif">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/删除页面所有的约束.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/添加基线约束.gif">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/创建「水平链」.gif">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/创建「垂直链」.gif">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/「水平链」.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/多出来了链条图标.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/spread.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/spread_inside.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/packed.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/weight.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Properties.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Inspector.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/修改控件的margin.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/修改纵横轴.gif">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Inspector中心区域.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/%3E%3E%3E.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/指定大小.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/MatchConstraints.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/约束匹配效果.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/设置宽高比.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/设置宽高比2.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/添加Guideline.png">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Guideline.gif">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Autoconnect.gif">
+<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/InferConstraints.gif">
+<meta property="og:updated_time" content="2018-02-05T13:21:35.160Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 约束布局（ConstraintLayout）详解">
+<meta name="twitter:description" content="本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解">
+<meta name="twitter:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/警告提示.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Airsaid&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Airsaid</h5>
+          <a href="mailto:airsaid1024@gmail.com" title="airsaid1024@gmail.com" class="mail">airsaid1024@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/airsaid" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                GitHub
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/airsaid" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android 约束布局（ConstraintLayout）详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android 约束布局（ConstraintLayout）详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-05T03:32:48.000Z" itemprop="datePublished" class="page-time">
+  2018-02-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#约束概述"><span class="post-toc-number">2.</span> <span class="post-toc-text">约束概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#转换布局"><span class="post-toc-number">3.</span> <span class="post-toc-text">转换布局</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开始"><span class="post-toc-number">4.</span> <span class="post-toc-text">开始</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建布局"><span class="post-toc-number">5.</span> <span class="post-toc-text">创建布局</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#添加约束"><span class="post-toc-number">6.</span> <span class="post-toc-text">添加约束</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#基线约束"><span class="post-toc-number">7.</span> <span class="post-toc-text">基线约束</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Chains"><span class="post-toc-number">8.</span> <span class="post-toc-text">Chains</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Properties"><span class="post-toc-number">9.</span> <span class="post-toc-text">Properties</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置宽高比例"><span class="post-toc-number">10.</span> <span class="post-toc-text">设置宽高比例</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Guidelines"><span class="post-toc-number">11.</span> <span class="post-toc-text">Guidelines</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自动添加约束"><span class="post-toc-number">12.</span> <span class="post-toc-text">自动添加约束</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number">13.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Android-ConstraintLayout-Detailed"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android 约束布局（ConstraintLayout）详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-05 11:32:48" datetime="2018-02-05T03:32:48.000Z"  itemprop="datePublished">2018-02-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>ConstraintLayout 是一个 ViewGroup，它的出现是为了解决复杂布局时，布局嵌套（布局内的布局）过多的问题（嵌套布局会增加绘制界面所需的时间）。它可以根据同级视图和父布局的约束条件为每个视图定义位置，类似于 RelativeLayout 所有视图都是根据兄弟视图和父级布局之间的关系来布局的，但是与 RelativeLayout 相比，它更加灵活，更易于使用。</p>
+<p>在 Android 2.2 的版本中，为了给 ConstraintLayout 提供支持，Android 设计了新的布局编辑器。我们可以直接在布局编辑器当中拖动控件、添加约束，一气呵成。当然，在布局编辑器当中所做的操作，XML 布局当中就会自动生成对应的属性。</p>
+<p>其中生成的一些属性，有可能并不是必须需要的。所以在生成后，你可能还需要手动检查、清理一下。或者你也可以直接在 XML 中编写属性，ConstraintLayout 的属性虽多，但是都是成组的，还是很容易掌握的。</p>
+<h2 id="约束概述"><a href="#约束概述" class="headerlink" title="约束概述"></a>约束概述</h2><p>要在 ConstraintLayout 中定义 View 的位置，必须为该 View 添加至少一个水平和垂直约束（否则该 View 就会在左上角绘制）。该约束对象可以是另一个视图，或者父布局（也就是 ConstraintLayout），或者是不可见的 Guideline（后面会讲 Guideling）等。</p>
+<p>如果有缺少的约束（或其他的一些优化问题），编辑器会在右上角显示警告提示（编译器不会错误）：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="警告提示.png" alt="警告提示（提示有 5 处可修复和优化的地方）" title="">
+                </div>
+                <div class="image-caption">警告提示（提示有 5 处可修复和优化的地方）</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="正常情况.png" alt="正常情况" title="">
+                </div>
+                <div class="image-caption">正常情况</div>
+            </figure>
+<h2 id="转换布局"><a href="#转换布局" class="headerlink" title="转换布局"></a>转换布局</h2><p>如果要将现有布局转换为约束布局，只需按照下列步骤操作：</p>
+<ol>
+<li><p>在 Android Studio 中打开布局，然后单击编辑器窗口底部的 Design 选项卡。</p>
+</li>
+<li><p>在 Component Tree 窗口中，右键单击布局，然后单击 Convert layout to ConstraintLayout。</p>
+</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="转换代码.png" alt="转换布局" title="">
+                </div>
+                <div class="image-caption">转换布局</div>
+            </figure>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>要在项目中使用 ConstraintLayout，我们需要在 build.gradle 中添加依赖（新版 AndroidStudio 会默认添加）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.android.support.constraint:constraint-layout:1.0.2'</span></span><br></pre></td></tr></table></figure>
+<p>然后，在工具栏中同步 Gradle 文件。</p>
+<h2 id="创建布局"><a href="#创建布局" class="headerlink" title="创建布局"></a>创建布局</h2><p>接下来，我们创建一个布局，根布局就用 ConstraintLayout：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.constraint.ConstraintLayout</span><br><span class="line">    xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    xmlns:app=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/android.support.constraint.ConstraintLayout&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="添加约束"><a href="#添加约束" class="headerlink" title="添加约束"></a>添加约束</h2><p>添加约束十分简单，我们首先从 Design 界面的 Palette 操作栏拖动一个 Button 到蓝图中，添加完后，点击选中它，效果是这样的：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="蓝图效果.png" alt="蓝图效果" title="">
+                </div>
+                <div class="image-caption">蓝图效果</div>
+            </figure>
+<p>可以看到，上下左右都有一个小圆圈，这个圆圈就是用来添加约束的。</p>
+<p>四个角的矩形，是用来扩大或缩小控件的。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="删除该控件上所有约束.png" alt="删除该控件上所有约束" title="">
+                </div>
+                <div class="image-caption">删除该控件上所有约束</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="编辑基线.png" alt="编辑基线，用于基线对齐（下面会说）" title="">
+                </div>
+                <div class="image-caption">编辑基线，用于基线对齐（下面会说）</div>
+            </figure>
+<p>现在我们来为这个 Button 添加约束：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="添加约束.gif" alt="添加约束（约束对象为父控件）" title="">
+                </div>
+                <div class="image-caption">添加约束（约束对象为父控件）</div>
+            </figure>
+<p>看这个效果，有没有一种「四马分尸」的感觉？当只有一条边拉这个 Button 时，Button 马上就被拉过去了，但是当四个边都开始拉这个 Button 时，Button 就在中间动弹不得了。</p>
+<p>看完了动图，我们再来看看 XML 布局中的变化：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button</span><br><span class="line">    android:id=<span class="string">"@+id/button"</span></span><br><span class="line">    android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:text=<span class="string">"Button"</span></span><br><span class="line">    app:layout_constraintTop_toTopOf=<span class="string">"parent"</span></span><br><span class="line">    android:layout_marginTop=<span class="string">"8dp"</span></span><br><span class="line">    android:layout_marginLeft=<span class="string">"8dp"</span></span><br><span class="line">    app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span></span><br><span class="line">    android:layout_marginRight=<span class="string">"8dp"</span></span><br><span class="line">    app:layout_constraintRight_toRightOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span></span><br><span class="line">    android:layout_marginBottom=<span class="string">"8dp"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>因为我们的目的是想让这个 Button 居中，但是它却默认给我们添加了 margin，这个显然是多余的。</p>
+<p>如果不想每次添加约束后都在这条边的约束上添加 margin，我们可以在上面的工具栏中进行设置：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="设置默认margin.png" alt="设置控件默认的 margin" title="">
+                </div>
+                <div class="image-caption">设置控件默认的 margin</div>
+            </figure>
+<p>抛去 margin 相关的属性，那么约束父控件的相关属性就是如下这些了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_constraintTop_toTopOf=<span class="string">"parent"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_constraintRight_toRightOf=<span class="string">"parent"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span></span><br></pre></td></tr></table></figure>
+<p>在上面的图中我们已经看到了，每个控件的上下左右都有一个圆圈，用于添加约束的。</p>
+<p>那么这些属性的 constraintXXX 就是指定的当前控件的约束位置的，而 toXXX 就是目标约束位置。</p>
+<p>这个位置可以是上面的例子一样是 parent（也就是父控件），也可以是另一个控件。</p>
+<p>接下来我们再来看看对于其他控件的约束。</p>
+<p>再拖一个 Buttton 进入蓝图中，然后给这个 Button 添加约束：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="添加约束（约束对象为另一个控件）.gif" alt="添加约束（约束对象为另一个控件）" title="">
+                </div>
+                <div class="image-caption">添加约束（约束对象为另一个控件）</div>
+            </figure>
+<p>XML 布局：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;Button    </span><br><span class="line">	android:id=<span class="string">"@+id/button2"</span>    </span><br><span class="line">	android:layout_width=<span class="string">"wrap_content"</span>    </span><br><span class="line">	android:layout_height=<span class="string">"wrap_content"</span>    </span><br><span class="line">	android:text=<span class="string">"Button"</span>    </span><br><span class="line">	app:layout_constraintLeft_toLeftOf=<span class="string">"@+id/button"</span>    </span><br><span class="line">	app:layout_constraintRight_toRightOf=<span class="string">"@+id/button"</span>    </span><br><span class="line">	android:layout_marginTop=<span class="string">"48dp"</span>    </span><br><span class="line">	app:layout_constraintTop_toBottomOf=<span class="string">"@+id/button"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>添加完约束了，如果要删除指定的单个约束的话，单击变红的圆圈即可：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="删除指定的单个约束.gif" alt="删除指定的单个约束" title="">
+                </div>
+                <div class="image-caption">删除指定的单个约束</div>
+            </figure>
+<p>或者是上面提到了，删除指定控件的所有约束。</p>
+<p>或者是工具栏中的，删除页面所有的约束：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="删除页面所有的约束.png" alt="删除页面所有的约束" title="">
+                </div>
+                <div class="image-caption">删除页面所有的约束</div>
+            </figure>
+<h2 id="基线约束"><a href="#基线约束" class="headerlink" title="基线约束"></a>基线约束</h2><p>基线约束的作用就是将视图的文本基线与另一个视图的文本基线对齐：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="添加基线约束.gif" alt="添加基线约束" title="">
+                </div>
+                <div class="image-caption">添加基线约束</div>
+            </figure>
+<p>添加完成后，在 XML 布局中，B 控件就会多出这么一个属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_constraintBaseline_toBaselineOf=<span class="string">"@+id/a"</span></span><br></pre></td></tr></table></figure>
+<p>该属性就是用于基线对齐的。</p>
+<h2 id="Chains"><a href="#Chains" class="headerlink" title="Chains"></a>Chains</h2><p>Chains（链）是一种特定的约束，一个链包含了多个视图，它允许链中的视图共享空间，并控制可用空间在它们之间如何分配。该效果与 LinearLayout 的 Weiget 类似，但是链的作用远远超过它。</p>
+<p>我们要是想创建一个链，那么首先就需要创建多个视图控件，然后再选择是创建「水平链」还是「垂直链」。</p>
+<p>让我们从三个视图中创建一个「水平链」：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="创建「水平链」.gif" alt="创建「水平链」" title="">
+                </div>
+                <div class="image-caption">创建「水平链」</div>
+            </figure>
+<p>「垂直链」：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="创建「垂直链」.gif" alt="创建「垂直链」" title="">
+                </div>
+                <div class="image-caption">创建「垂直链」</div>
+            </figure>
+<p>以「水平链」为例，我们来看看它们的样子：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="「水平链」.png" alt="「水平链」" title="">
+                </div>
+                <div class="image-caption">「水平链」</div>
+            </figure>
+<p>可以发现，两侧控件的约束样子和前面约束的样子是一样的，我把它称之为「单约束」，也就是两侧控件只是单方面的约束了对方（这里是父控件）。</p>
+<p>而中间的控件，两侧的约束则是链条的样子，这表示它约束了左右侧控件，而左右侧控件同样也约束了它：「互相约束」。</p>
+<p>在 XML 布局中，是通过如下属性实现的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button</span><br><span class="line">    android:id=<span class="string">"@+id/button1"</span></span><br><span class="line">    android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:text=<span class="string">"Button"</span></span><br><span class="line">    app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintRight_toLeftOf=<span class="string">"@+id/button2"</span></span><br><span class="line">    tools:layout_editor_absoluteY=<span class="string">"69dp"</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;Button</span><br><span class="line">    android:id=<span class="string">"@+id/button2"</span></span><br><span class="line">    android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:text=<span class="string">"Button"</span></span><br><span class="line">    app:layout_constraintLeft_toRightOf=<span class="string">"@+id/button1"</span></span><br><span class="line">    app:layout_constraintRight_toLeftOf=<span class="string">"@+id/button3"</span></span><br><span class="line">    tools:layout_editor_absoluteY=<span class="string">"69dp"</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;Button</span><br><span class="line">    android:id=<span class="string">"@+id/button3"</span></span><br><span class="line">    android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:text=<span class="string">"Button"</span></span><br><span class="line">    app:layout_constraintLeft_toRightOf=<span class="string">"@+id/button2"</span></span><br><span class="line">    app:layout_constraintRight_toRightOf=<span class="string">"parent"</span></span><br><span class="line">    tools:layout_editor_absoluteY=<span class="string">"69dp"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>我们刚刚创建好了一条链，此时我们可以设置 Cycle Chain Mode（链式模式）来告诉 Chains：“你应该怎样去填充剩余的空间”。</p>
+<p>在「蓝图」中，设置的方式是点击链条的小图标：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="多出来了链条图标.png" alt="多出来了链条图标" title="">
+                </div>
+                <div class="image-caption">多出来了链条图标</div>
+            </figure>
+<p>在「布局」中，设置的属性是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layout_constraintHorizontal_chainStyle</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layout_constraintVertical_chainStyle</span><br></pre></td></tr></table></figure>
+<p>分别对应着「水平链」和「垂直链」。</p>
+<p>有三种可选的参数：</p>
+<ul>
+<li><p>spread：将可用空间以均匀分布的方式将视图放置在链中（默认模式）：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="spread.png" alt="spread" title="">
+                </div>
+                <div class="image-caption">spread</div>
+            </figure>
+</li>
+<li><p>spread_inside：将链中最外面的视图对齐到外边缘，然后在可用空间内均匀的放置链中的其他视图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="spread_inside.png" alt="spread_inside" title="">
+                </div>
+                <div class="image-caption">spread_inside</div>
+            </figure>
+</li>
+<li><p>packed：将链中的视图紧紧的放在一起（可以提供边距让其分开），然后让其居中在可用空间内：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="packed.png" alt="packed" title="">
+                </div>
+                <div class="image-caption">packed</div>
+            </figure>
+</li>
+</ul>
+<p>除了上面说的之外，Chains 还能对链中单独的视图控件设置 Weiget。因为目前并不支持在编辑器当中设置 Weiget，所以我们只能在布局中进行设置了，设置的属性是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layout_constraintHorizontal_weight</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layout_constraintVertical_weight</span><br></pre></td></tr></table></figure>
+<p>我们现在将第一个 Button 填充完剩余的空间，在该 Buttton 上设置如下属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:layout_width=<span class="string">"0dp"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_constraintHorizontal_weight=<span class="string">"1"</span></span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="weight.png" alt="weight 效果" title="">
+                </div>
+                <div class="image-caption">weight 效果</div>
+            </figure>
+<p>使用和 LinearLayout 的 Weiget 一致，很好理解。</p>
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><p>基本的添加、删除约束我们已经掌握了，那么现在再来将目光转向右侧的 Properties 区域。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Properties.png" alt="Properties" title="">
+                </div>
+                <div class="image-caption">Properties</div>
+            </figure>
+<p>该区域分为了上下两个部分，下部分就是选中控件的一些属性什么的，很好理解。</p>
+<p>重点来看看上半部分，该部分被称为：Inspector 区域。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Inspector.png" alt="Inspector" title="">
+                </div>
+                <div class="image-caption">Inspector</div>
+            </figure>
+<p>首先来看这些数字，很明显就是当前控件的 margin 值，我们可以直接在上面进行修改：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="修改控件的margin.png" alt="修改控件的 margin" title="">
+                </div>
+                <div class="image-caption">修改控件的 margin</div>
+            </figure>
+<p>还有就是左边和下边的两个轴，我把它称之为纵横轴。作用是用于确定控件位置的：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="修改纵横轴.gif" alt="修改纵横轴" title="">
+                </div>
+                <div class="image-caption">修改纵横轴</div>
+            </figure>
+<p>根据上图可以看到，因为该控件同时添加了水平和垂直约束，所以两条轴都可以进行操作。</p>
+<p>轴上面的数字是比例，对应的属性如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app:layout_constraintVertical_bias=&quot;0.5&quot;</span><br><span class="line">app:layout_constraintHorizontal_bias=&quot;0.5&quot;</span><br></pre></td></tr></table></figure>
+<p>再来看看中心区域：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Inspector中心区域.png" alt="Inspector 中心区域" title="">
+                </div>
+                <div class="image-caption">Inspector 中心区域</div>
+            </figure>
+<p>四条边的原点就是添加的约束，点击的作用是删除该约束。</p>
+<p>重要的是中心的 &lt;&lt;&lt;，这个代表了当前控件的宽高计算方式。点击是可以切换的，一共有三种：</p>
+<ul>
+<li><p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src=">>>.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>：这个代表的就是 wrap_content，不用过多解释了。</p>
+</li>
+<li><p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="指定大小.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>：这个就是指定宽高的大小。</p>
+</li>
+<li><p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="MatchConstraints.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>：这个代表的是：Match Constraints（有点类似于 match_parent），就给强翻成约束匹配吧… 这个是 ConstraintLayout 特有的，它会尽可能扩展以满足各方的约束（在考虑视图边界之后）。但是，可以使用以下属性和值修改该行为（只有在将视图宽度设置为与约束匹配时，这些属性才会生效）：</p>
+<ul>
+<li>layout_constraintWidth_default：<ul>
+<li>spread：这是默认的行为，它会尽可能的扩展视图来满足约束。</li>
+<li>wrap：与上面所说的 wrap_content 不同的是，虽然都是适应内容，但仍然允许视图比约束要求的视图更小。</li>
+<li>layout_constraintWidth_min：指定视图的最小宽度（dp）。<br>​        - layout_constraintWidth_max：指定视图的最大宽度（dp）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>下面来几个例子，演示下约束匹配的效果，比如说，要让一个 Button 宽度填充满，仅需要将宽度设置为 0dp 即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:layout_width=<span class="string">"0dp"</span></span><br></pre></td></tr></table></figure>
+<p>如果是两个 Button：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button    </span><br><span class="line">	android:id=<span class="string">"@+id/button1"</span>    </span><br><span class="line">	android:layout_width=<span class="string">"0dp"</span>    </span><br><span class="line">	android:layout_height=<span class="string">"wrap_content"</span>    </span><br><span class="line">	android:text=<span class="string">"A"</span>    </span><br><span class="line">	app:layout_constraintTop_toTopOf=<span class="string">"parent"</span>    </span><br><span class="line">	app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span>    </span><br><span class="line">	app:layout_constraintRight_toRightOf=<span class="string">"parent"</span>    </span><br><span class="line">	app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;Button    </span><br><span class="line">	android:id=<span class="string">"@+id/button2"</span>    </span><br><span class="line">	android:layout_width=<span class="string">"0dp"</span>    </span><br><span class="line">	android:layout_height=<span class="string">"0dp"</span>    </span><br><span class="line">	android:text=<span class="string">"B"</span>    </span><br><span class="line">	app:layout_constraintTop_toBottomOf=<span class="string">"@+id/button1"</span>    </span><br><span class="line">	app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span>    </span><br><span class="line">	app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span>    </span><br><span class="line">	app:layout_constraintRight_toRightOf=<span class="string">"parent"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>效果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="约束匹配效果.png" alt="约束匹配效果" title="">
+                </div>
+                <div class="image-caption">约束匹配效果</div>
+            </figure>
+<h2 id="设置宽高比例"><a href="#设置宽高比例" class="headerlink" title="设置宽高比例"></a>设置宽高比例</h2><p>当宽高至少有一项设置为 0dp 时（也就是 Match Constraints），那么我们就可以为该视图设置宽高比例。设置的属性是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layout_constraintDimensionRatio</span><br></pre></td></tr></table></figure>
+<p>如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Button    </span><br><span class="line">	android:id=<span class="string">"@+id/button"</span>    </span><br><span class="line">	android:layout_width=<span class="string">"0dp"</span>    </span><br><span class="line">	android:layout_height=<span class="string">"wrap_content"</span>    </span><br><span class="line">	android:text=<span class="string">"button"</span>    </span><br><span class="line">	app:layout_constraintDimensionRatio=<span class="string">"3:1"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="设置宽高比.png" alt="设置宽高比" title="">
+                </div>
+                <div class="image-caption">设置宽高比</div>
+            </figure>
+<p>参数是一个浮点值：“宽度：高度”，在该例子中，表示的宽高比是 3:1，也就是高度是宽度的三分之一。</p>
+<p>当我们的宽高都设置为 0dp 时，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Buttona</span><br><span class="line">	android:id=<span class="string">"@+id/button"</span>    </span><br><span class="line">	android:layout_width=<span class="string">"0dp"</span>    </span><br><span class="line">	android:layout_height=<span class="string">"0dp"</span>    </span><br><span class="line">	android:text=<span class="string">"button"</span>    </span><br><span class="line">	app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span>    </span><br><span class="line">	app:layout_constraintRight_toRightOf=<span class="string">"parent"</span>/&gt;</span><br></pre></td></tr></table></figure>
+<p>此时，该视图是不会显示的，虽然我们加了 left 和 rigth 约束到父控件，让它知道了它的宽度就是父控件的高度，但是此时它还并不知道自己有多高。<br>所以此时我们在添加 ration 时，则可以指示哪一方应该受到约束，方法是在比率前面添加字母 W（用于限制宽度）或 H（用于限制高度），用逗号分隔：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_constraintDimensionRatio=<span class="string">"h, 3:1"</span></span><br></pre></td></tr></table></figure>
+<p>这里设置的宽高比例是 3:1，那么高度就只有宽度的三分之一了：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="设置宽高比2.png" alt="设置宽高比" title="">
+                </div>
+                <div class="image-caption">设置宽高比</div>
+            </figure>
+<h2 id="Guidelines"><a href="#Guidelines" class="headerlink" title="Guidelines"></a>Guidelines</h2><p>Guidelines 是一条对实际显示界面不可见的线。用处是帮助我们的控件增加约束。</p>
+<p>我们可以通过该图标来添加垂直或者水平的 Guidelines：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="添加Guideline.png" alt="添加 Guideline" title="">
+                </div>
+                <div class="image-caption">添加 Guideline</div>
+            </figure>
+<p>比如我们想让控件在中心显示：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Guideline.gif" alt="Guideline 演示" title="">
+                </div>
+                <div class="image-caption">Guideline 演示</div>
+            </figure>
+<p>可以看到 Guidelines 可以切换百分比，或者是实际的距离。具体用哪种还是得根据实际情况来。</p>
+<h2 id="自动添加约束"><a href="#自动添加约束" class="headerlink" title="自动添加约束"></a>自动添加约束</h2><p>有两种方式实现自动添加约束，分别是：</p>
+<ul>
+<li>Autoconnect：这是一个独立的功能，默认是关闭的。我们可以开启它，开启后，它将自动为新添加的视图创建两个或者更多的约束。其他的视图则不会自动添加，如：</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Autoconnect.gif" alt="Autoconnect" title="">
+                </div>
+                <div class="image-caption">Autoconnect</div>
+            </figure>
+<ul>
+<li>Infer Constraints：为当前所有的视图自动添加约束：</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="InferConstraints.gif" alt="Infer Constraints" title="">
+                </div>
+                <div class="image-caption">Infer Constraints</div>
+            </figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a href="https://developer.android.com/training/constraint-layout/index.html?hl=zh-cn#add-constraintlayout-to-your-project" target="_blank" rel="noopener">https://developer.android.com/training/constraint-layout/index.html?hl=zh-cn#add-constraintlayout-to-your-project</a></p>
+</li>
+<li><p><a href="https://developer.android.com/reference/android/support/constraint/ConstraintLayout.html" target="_blank" rel="noopener">https://developer.android.com/reference/android/support/constraint/ConstraintLayout.html</a></p>
+</li>
+<li><p><a href="https://constraintlayout.com/" target="_blank" rel="noopener">https://constraintlayout.com/</a></p>
+</li>
+<li><p><a href="http://blog.csdn.net/guolin_blog/article/details/53122387" target="_blank" rel="noopener">http://blog.csdn.net/guolin_blog/article/details/53122387</a></p>
+</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-02-05T13:21:35.160Z" itemprop="dateUpdated">2018-02-05 21:21:35</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/20180205/Android-ConstraintLayout-Detailed/" target="_blank" rel="external">http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://airsaid.github.io">
+            <img src="/img/avatar.jpg" alt="Airsaid">
+            Airsaid
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ConstraintLayout/">ConstraintLayout</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&pic=http://airsaid.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&source=
+本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&via=http://airsaid.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/20180202/Use-Android-Support-Annotations-library-optimize-code/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用 Android Support Annotations 库来优化你的代码</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "dOS2FeHv1Sc7XREAn7Bjp7HS-gzGzoHsz",
+            appKey: "GL3GRksVTYy3wN2u22uid4BN",
+            avatar: "mm",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我喝咖啡~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Airsaid &copy; 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&pic=http://airsaid.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&source=
+本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&via=http://airsaid.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

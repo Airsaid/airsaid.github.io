@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>使用 Android Support Annotations 库来优化你的代码 | Airsaid&#39;s Blog | 为写出优雅的代码而努力</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,注解,代码优化">
+    <meta name="description" content="Android Support Library 从 19.1 版本开始引入了一个新的注解库（Android Support Annotations Library），其中包含了很多的元注解，使用它们修饰我们的代码， 可以让我们提高程序的开发效率，让我们更早的发现问题。以及对代码施以规范，让代码更加有可读性。这篇文章就来简单了解下这些注解，以及其使用。如有错误和遗漏，欢迎留言和补充～">
+<meta name="keywords" content="Android,注解,代码优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Android Support Annotations 库来优化你的代码">
+<meta property="og:url" content="http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/index.html">
+<meta property="og:site_name" content="Airsaid&#39;s Blog">
+<meta property="og:description" content="Android Support Library 从 19.1 版本开始引入了一个新的注解库（Android Support Annotations Library），其中包含了很多的元注解，使用它们修饰我们的代码， 可以让我们提高程序的开发效率，让我们更早的发现问题。以及对代码施以规范，让代码更加有可读性。这篇文章就来简单了解下这些注解，以及其使用。如有错误和遗漏，欢迎留言和补充～">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-02-05T13:21:35.175Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 Android Support Annotations 库来优化你的代码">
+<meta name="twitter:description" content="Android Support Library 从 19.1 版本开始引入了一个新的注解库（Android Support Annotations Library），其中包含了很多的元注解，使用它们修饰我们的代码， 可以让我们提高程序的开发效率，让我们更早的发现问题。以及对代码施以规范，让代码更加有可读性。这篇文章就来简单了解下这些注解，以及其使用。如有错误和遗漏，欢迎留言和补充～">
+    
+        <link rel="alternate" type="application/atom+xml" title="Airsaid&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Airsaid</h5>
+          <a href="mailto:airsaid1024@gmail.com" title="airsaid1024@gmail.com" class="mail">airsaid1024@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/airsaid" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                GitHub
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/airsaid" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用 Android Support Annotations 库来优化你的代码</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用 Android Support Annotations 库来优化你的代码</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-02T09:48:00.000Z" itemprop="datePublished" class="page-time">
+  2018-02-02
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IntDef-amp-StringDef"><span class="post-toc-number">2.</span> <span class="post-toc-text">@IntDef &amp; @StringDef</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Nullable-amp-NonNull"><span class="post-toc-number">3.</span> <span class="post-toc-text">@Nullable &amp; @NonNull</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#FloatRange-amp-IntRange"><span class="post-toc-number">4.</span> <span class="post-toc-text">@FloatRange &amp; @IntRange</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Size"><span class="post-toc-number">5.</span> <span class="post-toc-text">@Size</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#RequiresPermission"><span class="post-toc-number">6.</span> <span class="post-toc-text">@RequiresPermission</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CheckResult"><span class="post-toc-number">7.</span> <span class="post-toc-text">@CheckResult</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线程注解"><span class="post-toc-number">8.</span> <span class="post-toc-text">线程注解</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#资源注解"><span class="post-toc-number">9.</span> <span class="post-toc-text">资源注解</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ColorInt"><span class="post-toc-number">10.</span> <span class="post-toc-text">@ColorInt</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CallSuper"><span class="post-toc-number">11.</span> <span class="post-toc-text">@CallSuper</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#VisibleForTesting-amp-Keep"><span class="post-toc-number">12.</span> <span class="post-toc-text">@VisibleForTesting &amp; @Keep</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Use-Android-Support-Annotations-library-optimize-code"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用 Android Support Annotations 库来优化你的代码</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-02 17:48:00" datetime="2018-02-02T09:48:00.000Z"  itemprop="datePublished">2018-02-02</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>Android Support Library 从 19.1 版本开始引入了一个新的注解库（Android Support Annotations Library），其中包含了很多的元注解，使用它们修饰我们的代码， 可以让我们提高程序的开发效率，让我们更早的发现问题。以及对代码施以规范，让代码更加有可读性。这篇文章就来简单了解下这些注解，以及其使用。如有错误和遗漏，欢迎留言和补充～</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>在 build.gradle 中添加依赖库：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    compile <span class="string">'com.android.support:support-annotations:22.2.0'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：在新版本的 AndroidStudio 下，新建的项目就直接依赖了 support.appcompat 包，而其中已经有了 annotations 包，所以不必重复添加。如果你在使用下面的注解时发现找不到对应的注解，那么再按照如上步骤添加依赖库即可。</p>
+</blockquote>
+<h2 id="IntDef-amp-StringDef"><a href="#IntDef-amp-StringDef" class="headerlink" title="@IntDef &amp; @StringDef"></a>@IntDef &amp; @StringDef</h2><p>替代 Java 中枚举的注解，以 @IntDef 为例，定义和使用如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@IntDef</span>(&#123;RED, BLUE, YELLOW&#125;)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LightColors&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> RED = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BLUE = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> YELLOW = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(@LightColors <span class="keyword">int</span> color)</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>@interface：声明新的枚举注解类型。</li>
+<li>@Retention(RetentionPolicy.SOURCE)：告知编译器不将枚举的注解数据存储在 .class 文件中。</li>
+</ul>
+<p>如果允许常量与标志（例如：|、&amp; 和 ^ 等等）相结合，则我们可以使用 flag 属性，如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@IntDef</span>(flag = <span class="keyword">true</span>, value = &#123;RED, BLUE, YELLOW&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setColor(RED | BLUE);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Nullable-amp-NonNull"><a href="#Nullable-amp-NonNull" class="headerlink" title="@Nullable &amp; @NonNull"></a>@Nullable &amp; @NonNull</h2><ul>
+<li>@Nullable：注解的元素可以为 null。</li>
+<li>@NonNull：注解的元素不可以为 null。</li>
+</ul>
+<p>上面的注解可以修饰如下元素：<br>1，方法参数。如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Nullable</span></span><br><span class="line"><span class="keyword">private</span> String data;</span><br></pre></td></tr></table></figure></p>
+<p>2，方法的返回值。 如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Nullable</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getData</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3，成员属性。如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(@Nullable String data)</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当用空的参数传给被 @NonNull 修饰的方法参数的方法时，会给出如下警告提示（编译不会报错）：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passing <span class="string">"null"</span> argument to parameter annotated as <span class="meta">@NotNull</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="FloatRange-amp-IntRange"><a href="#FloatRange-amp-IntRange" class="headerlink" title="@FloatRange &amp; @IntRange"></a>@FloatRange &amp; @IntRange</h2><p>@FloatRange 和 @IntRange 是用于限定范围的注解。其中 @FloatRange 是限定 float 类型的，而 @IntRange 是限定 int 类型的。它们同上注解一样，可以修饰方法参数、方法返回值、成员属性。</p>
+<p>以 @IntRange 为例，修饰方法参数的定义如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAge</span><span class="params">(@IntRange(from = <span class="number">1</span>, to = <span class="number">180</span>)</span> <span class="keyword">int</span> age)</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果调用该方法传的参数不在 1 - 180 的范围内， 如：setAge(0)，那么编译会直接报如下错：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value must be ≥ <span class="number">1</span> and ≤ <span class="number">180</span> (was <span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Size"><a href="#Size" class="headerlink" title="@Size"></a>@Size</h2><p>@Size 注解的作用是限定长度的，同上注解一样，可以修饰方法参数、方法返回值、成员属性。</p>
+<ul>
+<li>限定字符串的长度：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(@Size(<span class="number">4</span>)</span> String data)</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当传入的字符串长度不等于 4  时，编译器会直接报错：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Length must be exactly <span class="number">4</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>限定数组的长度：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(@Size(<span class="number">4</span>)</span> <span class="keyword">int</span>[] data)</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>特殊的限定，如限定为 2 的倍数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(@Size(multiple = <span class="number">2</span>)</span> <span class="keyword">int</span>[] data)</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>限定最小的长度：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Size</span>(min = <span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<p>限定最大的长度：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Size</span>(max = <span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<p>等同于 @Size(2) 写法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Size</span>(value = <span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="RequiresPermission"><a href="#RequiresPermission" class="headerlink" title="@RequiresPermission"></a>@RequiresPermission</h2><p>该注解作用是表明方法所执行的内容需要权限。如需要单个权限：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequiresPermission</span>(Manifest.permission.CALL_PHONE)</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">callPhone</span><span class="params">(String phone)</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要一组权限：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequiresPermission</span>(allOf = &#123;</span><br><span class="line">        Manifest.permission.READ_EXTERNAL_STORAGE,</span><br><span class="line">        Manifest.permission.WRITE_EXTERNAL_STORAGE&#125;)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">copyFile</span><span class="params">(String dest, String source)</span> </span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于 intent 权限，我们可以定义在 intent 操作名称的字符串上：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequiresPermission</span>(android.Manifest.permission.BLUETOOTH)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ACTION_REQUEST_DISCOVERABLE =</span><br><span class="line">        <span class="string">"android.bluetooth.adapter.action.REQUEST_DISCOVERABLE"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>对于需要单独读写权限的内容提供程序的权限，我们可以在 @RequiresPermission.Read 或 @RequiresPermission.Write 注解中包含每个权限要求：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequiresPermission</span>.Read(<span class="meta">@RequiresPermission</span>(READ_HISTORY_BOOKMARKS))</span><br><span class="line"><span class="meta">@RequiresPermission</span>.Write(<span class="meta">@RequiresPermission</span>(WRITE_HISTORY_BOOKMARKS))</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Uri BOOKMARKS_URI = Uri.parse(<span class="string">"content://browser/bookmarks"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>如果权限依赖于提供给方法参数的特定值，那么可以对参数本身使用 @RequiresPermission 而不用列出具体的权限，如 startActivity(intent) 方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">startActivity</span><span class="params">(@RequiresPermission Intent intent, @Nullable Bundle)</span> </span>&#123;...&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当我们使用这种方式（间接权限）时，构建工具将执行数据流分析以检查传递到方法的参数是否具有任何 @RequiresPermission  注解。如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_CALL);</span><br><span class="line">intent.setData(Uri.parse(<span class="string">"tel:1234567890"</span>));</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>这里的 startActivity(intent) 就直接报错了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call <span class="keyword">requires</span> permission which may be rejected by user: <span class="function">code should explicitly check to see <span class="keyword">if</span> permission is <span class="title">available</span> <span class="params">(with `checkPermission`)</span> or explicitly handle a potential `SecurityException`</span></span><br></pre></td></tr></table></figure></p>
+<p>因为  Intent.ACTION_CALL 中标记了权限注解：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SdkConstant</span>(SdkConstantType.ACTIVITY_INTENT_ACTION)</span><br><span class="line"><span class="meta">@RequiresPermission</span>(Manifest.permission.CALL_PHONE)</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ACTION_CALL = <span class="string">"android.intent.action.CALL"</span>;</span><br></pre></td></tr></table></figure></p>
+<h2 id="CheckResult"><a href="#CheckResult" class="headerlink" title="@CheckResult"></a>@CheckResult</h2><p>@CheckResult 注解是作用于方法上的，作用是检验有没有处理返回值。如果没有处理返回值则会报错。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CheckResult</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getData</span><span class="params">(String data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> data.trim();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="线程注解"><a href="#线程注解" class="headerlink" title="线程注解"></a>线程注解</h2><p>线程注解可以检查某个方法是否从特定类型的线程调用。支持以下线程注解：</p>
+<ul>
+<li><p>@MainThread：表示标记的方法只应在主线程调用。如果标记的是一个类，那么该类中的所有方法都应该是在主线程被调用。例：（通常，应用程序的主线程也是 Ui 线程。但是，在特殊情况下，应用程序的主线程可能不是其 Ui 线程）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MainThread</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deliverResult</span><span class="params">(D data)</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@UiThread：表示标记的方法或构造函数只应该在  Ui 线程上调用。如果标记的是一个类，那么该类中的所有方法都应是在 Ui 线程被调用。例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@UiThread</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">setText</span><span class="params">(@NonNull String text)</span> </span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@WorkerThread：表示标记的方法只应该在工作线程上调用。如果标记的是一个类，那么该类中的所有方法都应是在一个工作线程上调用。例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WorkerThread</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> FilterResults <span class="title">performFiltering</span><span class="params">(CharSequence constraint)</span></span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@BinderThread：表示标记的方法只应在绑定线程上调用。如果标记的是一个类，那么该类中的所有方法都应是在绑定线程被调用。例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@BinderThread</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BeamShareData <span class="title">createBeamShareData</span><span class="params">()</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@AnyThread：表示可以从任何线程调用带标记的方法。如果标记的是一个类，那么该类中的所有方法都可以从任何线程中调用。例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@AnyThread</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deliverResult</span><span class="params">(D data)</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>构建工具会将 @MainThread 和 @UiThread 注解视为可以互换，因此，我们可以从 @MainThread 方法调用 @UiThread 方法，反之亦然。不过如果系统应用在不同线程上带有多个试图，Ui 线程可与主线程不同。因此，我们应该使用 @UiThread 标注于应用的视图层次结构关联的方法，使用 @MainThread 仅标注于应用生命周期关联的方法。</p>
+</blockquote>
+<h2 id="资源注解"><a href="#资源注解" class="headerlink" title="资源注解"></a>资源注解</h2><p>在 Android 中几乎所有的资源都有其对于的 id，我们在使用的时候可以直接通过 id 来，如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">textView.setText(getResources().getText(R.string.app_name));</span><br></pre></td></tr></table></figure></p>
+<p>但是这样如果没有写指定的资源注解的话就会风险，比如随便传了个 0，那么就会找不到对应的资源。<br>为了避免由于自己的粗心大意而引发的错误，我们就可以使用资源注解了，如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getText</span><span class="params">(@StringRes <span class="keyword">int</span> id)</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样当我们调用该方法时，如果传递的参数并不是 String 类型的资源 id，那么编译器就会报错提示。</p>
+<p>除了 @StringRes 资源注解外，还有：</p>
+<ul>
+<li>@IntegerRes：R.integer 类型资源。</li>
+<li>@AnimatorRes：R.animator 类型资源。</li>
+<li>@AnimRes：R.anim 类型资源。</li>
+<li>@ArrayRes：R.array 类型资源。</li>
+<li>@AttrRes：R.attr 类型资源。</li>
+<li>@BoolRes：R.bool 类型资源。</li>
+<li>@ColorRes：R.color 类型资源。</li>
+<li>@DimenRes：R.dimen 类型资源。</li>
+<li>@DrawableRes：R.drawable 类型资源。</li>
+<li>@FractionRes：R.fraction 类型资源。（百分比）</li>
+<li>@IdRes：R.id 类型资源。</li>
+<li>@InterpolatorRes：R.interpolator 类型资源。（插值器）</li>
+<li>@LayoutRes：R.layout 类型资源。</li>
+<li>@MenuRes：R.menu 类型资源。</li>
+<li>@PluralsRes：R.plurals 类型资源。（复数）</li>
+<li>@RawRes：R.raw 类型资源。</li>
+<li>@StyleableRes：R.styleable 类型资源。</li>
+<li>@StyleRes：R.style 类型资源。</li>
+<li>@TransitionRes： R.transition 类型资源。</li>
+<li>@XmlRes：R.xml 类型资源。</li>
+<li>@AnyRes：未知资源。（表示自己不知道是什么类型的资源。比如有可能为 R.drawable 也有可能是 R.string。）</li>
+</ul>
+<h2 id="ColorInt"><a href="#ColorInt" class="headerlink" title="@ColorInt"></a>@ColorInt</h2><p>@ColorInt 注解的作用为：限定颜色值。（ARGB：0xAARRGGBB）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setColor</span><span class="params">(@ColorInt <span class="keyword">int</span> color)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果直接使用资源 id，则会报错，如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setColor(R.color.colorAccent)<span class="comment">// 报错</span></span><br></pre></td></tr></table></figure></p>
+<p>正确的使用是：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setColor(<span class="number">0xFFFF00FF</span>);</span><br></pre></td></tr></table></figure></p>
+<p>如果要使用资源 id，则可以通过 ContextCompat.getColor() 方法来：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setColor(ContextCompat.getColor(context, R.color.colorAccent));</span><br></pre></td></tr></table></figure></p>
+<h2 id="CallSuper"><a href="#CallSuper" class="headerlink" title="@CallSuper"></a>@CallSuper</h2><p>该注解用于修饰方法，表示重写该方法时必须调用 super 方法。如 onCreate() 方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@CallSuper</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重写 onCreate() 方法时，必须调用 super 方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">super</span>.onCreate(savedInstanceState);</span><br></pre></td></tr></table></figure></p>
+<p>否则报错。</p>
+<h2 id="VisibleForTesting-amp-Keep"><a href="#VisibleForTesting-amp-Keep" class="headerlink" title="@VisibleForTesting &amp; @Keep"></a>@VisibleForTesting &amp; @Keep</h2><p>使用 @VisibleForTesting 和 @Keep 注解可以表示方法、类、或字段的可访问性。</p>
+<ul>
+<li><p>@VisibleForTesting：该注解只起到一个注释的作用，告诉其他开发者被标记的代码为什么有这么大的可见程度（为了测试方便）。因此，经常用来修饰 public 或 protected，用来修饰 private 并不会报错，但是没有意义。</p>
+</li>
+<li><p>@Keep：标记的指定代码在混淆时不会被混淆。</p>
+</li>
+</ul>
+<blockquote>
+<p>参考：</p>
+</blockquote>
+<ul>
+<li><a href="https://developer.android.com/studio/write/annotations.html?hl=zh-cn" target="_blank" rel="noopener">https://developer.android.com/studio/write/annotations.html?hl=zh-cn</a></li>
+<li><a href="http://droidyue.com/blog/2016/08/14/android-annnotation/" target="_blank" rel="noopener">http://droidyue.com/blog/2016/08/14/android-annnotation/</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-02-05T13:21:35.175Z" itemprop="dateUpdated">2018-02-05 21:21:35</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/20180202/Use-Android-Support-Annotations-library-optimize-code/" target="_blank" rel="external">http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://airsaid.github.io">
+            <img src="/img/avatar.jpg" alt="Airsaid">
+            Airsaid
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码优化/">代码优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/注解/">注解</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/&title=《使用 Android Support Annotations 库来优化你的代码》 — Airsaid's Blog&pic=http://airsaid.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/&title=《使用 Android Support Annotations 库来优化你的代码》 — Airsaid's Blog&source=
+Android Support Library 从 19.1 版本开始引入了一个新的注解库（Android Support Annotations Li..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用 Android Support Annotations 库来优化你的代码》 — Airsaid's Blog&url=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/&via=http://airsaid.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/20180205/Android-ConstraintLayout-Detailed/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android 约束布局（ConstraintLayout）详解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/20180201/Java8-Interface-DefaultMethod-StaticMethod/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Java 8 中接口的默认方法与静态方法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "dOS2FeHv1Sc7XREAn7Bjp7HS-gzGzoHsz",
+            appKey: "GL3GRksVTYy3wN2u22uid4BN",
+            avatar: "mm",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我喝咖啡~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Airsaid &copy; 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/&title=《使用 Android Support Annotations 库来优化你的代码》 — Airsaid's Blog&pic=http://airsaid.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/&title=《使用 Android Support Annotations 库来优化你的代码》 — Airsaid's Blog&source=
+Android Support Library 从 19.1 版本开始引入了一个新的注解库（Android Support Annotations Li..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用 Android Support Annotations 库来优化你的代码》 — Airsaid's Blog&url=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/&via=http://airsaid.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://airsaid.github.io/20180202/Use-Android-Support-Annotations-library-optimize-code/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
