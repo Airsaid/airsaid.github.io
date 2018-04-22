@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android 约束布局（ConstraintLayout）1.1.0 版详解 | Airsaid&#39;s Blog | 为写出优雅的代码而努力</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,ConstraintLayout">
+    <meta name="description" content="本篇 ConstraintLayout 讲解版本：1.1.0 稳定版">
+<meta name="keywords" content="Android,ConstraintLayout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 约束布局（ConstraintLayout）1.1.0 版详解">
+<meta property="og:url" content="http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/index.html">
+<meta property="og:site_name" content="Airsaid&#39;s Blog">
+<meta property="og:description" content="本篇 ConstraintLayout 讲解版本：1.1.0 稳定版">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/22/162ed83885b3f59f?w=190&h=180&f=png&s=21692">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/22/162ed83c3ca886c9?w=396&h=612&f=png&s=195766">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/22/162ed8447e884960?w=510&h=306&f=png&s=129004">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/22/162ed8497e3f1ee0?w=920&h=964&f=png&s=13933">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/22/162ed84c4ff3103f?w=504&h=118&f=png&s=21235">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/22/162ed84e07947d74?w=494&h=98&f=png&s=18509">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/22/162ed867e476f52d?w=241&h=343&f=gif&s=24799">
+<meta property="og:updated_time" content="2018-04-22T13:44:33.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 约束布局（ConstraintLayout）1.1.0 版详解">
+<meta name="twitter:description" content="本篇 ConstraintLayout 讲解版本：1.1.0 稳定版">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/4/22/162ed83885b3f59f?w=190&h=180&f=png&s=21692">
+    
+        <link rel="alternate" type="application/atom+xml" title="Airsaid&#39;s Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Airsaid</h5>
+          <a href="mailto:airsaid1024@gmail.com" title="airsaid1024@gmail.com" class="mail">airsaid1024@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/airsaid" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                GitHub
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/airsaid" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android 约束布局（ConstraintLayout）1.1.0 版详解</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android 约束布局（ConstraintLayout）1.1.0 版详解</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-22T13:41:58.000Z" itemprop="datePublished" class="page-time">
+  2018-04-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备"><span class="post-toc-number">2.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Circular-Positioning"><span class="post-toc-number">3.</span> <span class="post-toc-text">Circular Positioning</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Enforcing-constraints"><span class="post-toc-number">4.</span> <span class="post-toc-text">Enforcing constraints</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dimensions"><span class="post-toc-number">5.</span> <span class="post-toc-text">Dimensions</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Margins-and-chains"><span class="post-toc-number">6.</span> <span class="post-toc-text">Margins and chains</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Optimizer"><span class="post-toc-number">7.</span> <span class="post-toc-text">Optimizer</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Barrier"><span class="post-toc-number">8.</span> <span class="post-toc-text">Barrier</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Group"><span class="post-toc-number">9.</span> <span class="post-toc-text">Group</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Placeholder"><span class="post-toc-number">10.</span> <span class="post-toc-text">Placeholder</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">11.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Android-ConstraintLayout-1.1.0-Detailed"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android 约束布局（ConstraintLayout）1.1.0 版详解</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-22 21:41:58" datetime="2018-04-22T13:41:58.000Z"  itemprop="datePublished">2018-04-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
+<p>本篇 ConstraintLayout 讲解版本：1.1.0 稳定版</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在<a href="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/">上一篇文章</a>中，我们对 ConstraintLayout 1.0.2 版进行了详细的了解。而当时说好的 1.1 版本的文章却直到现在才出来，相隔了好久。其实关于 1.1 beta 版的文章早已经写完，但却一直没有发布，这是因为当时担心后面的稳定版会和现有的冲突（事实上的确有），所以一直到本周四，Google 宣布 ConstraintLayout 1.1 正式版发布，于是在周末休息时重新整理发布了这篇文章。</p>
+<p>如果对 ConstraintLayout 不了解，并且还没有观看上篇文章的，强烈建议先观看完上篇文章，因为本篇只是对上篇的补充。如果有遗落或错误，欢迎各位补充和指正。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">'com.android.support.constraint:constraint-layout:1.1.0'</span></span><br></pre></td></tr></table></figure>
+<h2 id="Circular-Positioning"><a href="#Circular-Positioning" class="headerlink" title="Circular Positioning"></a>Circular Positioning</h2><p>圆形定位（Circular Positioning）可以让一个控件以另一个控件的中心为中心点，来设置其相对与该中心点的距离和角度。<br>可以设置的属性有：</p>
+<ul>
+<li>layout_constraintCircle：引用另一个控件的 id。</li>
+<li>layout_constraintCircleRadius：到另一个控件中心的距离。</li>
+<li>layout_constraintCircleAngle：控件的角度（顺时针，0 - 360 度）。</li>
+</ul>
+<p>下面以给头像设置 badge 为例，演示下其用法：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;android.support.constraint.ConstraintLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    xmlns:app=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span></span><br><span class="line">    tools:context=<span class="string">"com.github.airsaid.constraintlayoutdemo.MainActivity"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ImageView</span><br><span class="line">        android:id=<span class="string">"@+id/img_avatar"</span></span><br><span class="line">        android:layout_width=<span class="string">"60dp"</span></span><br><span class="line">        android:layout_height=<span class="string">"60dp"</span></span><br><span class="line">        android:src=<span class="string">"@mipmap/ic_avatar"</span></span><br><span class="line">        app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintRight_toRightOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=<span class="string">"@+id/txt_label"</span></span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        android:text=<span class="string">"VIP"</span></span><br><span class="line">        android:textColor=<span class="string">"#FFFF00"</span></span><br><span class="line">        android:textStyle=<span class="string">"bold"</span></span><br><span class="line">        app:layout_constraintCircle=<span class="string">"@id/img_avatar"</span></span><br><span class="line">        app:layout_constraintCircleAngle=<span class="string">"45"</span></span><br><span class="line">        app:layout_constraintCircleRadius=<span class="string">"30dp"</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/android.support.constraint.ConstraintLayout&gt;</span><br></pre></td></tr></table></figure></p>
+<p>运行结果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2018/4/22/162ed83885b3f59f?w=190&h=180&f=png&s=21692" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="Enforcing-constraints"><a href="#Enforcing-constraints" class="headerlink" title="Enforcing constraints"></a>Enforcing constraints</h2><p>在 1.1 版本之前，如果将控件的尺寸设置为了 WRAP_CONTENT，那么对控件设置约束（如：minWidth 等）是不起作用的。那么强制约束（Enforcing constraints）的作用就是，在控件被设置 WRAP_CONTENT 的情况下，使约束依然生效。</p>
+<p>需要使用到的属性有：</p>
+<ul>
+<li>app:constrainedWidth=”true|false”</li>
+<li>app:constrainedHeight=”true|false”</li>
+</ul>
+<p>下面的例子演示了没有设置强制约束和设置了强制约束的对比：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;ImageView</span><br><span class="line">        android:id=<span class="string">"@+id/img_avatar"</span></span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        android:src=<span class="string">"@mipmap/ic_avatar"</span></span><br><span class="line">        app:layout_constrainedWidth=<span class="string">"false"</span></span><br><span class="line">        app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintRight_toRightOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintWidth_max=<span class="string">"100dp"</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;ImageView</span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        android:src=<span class="string">"@mipmap/ic_avatar"</span></span><br><span class="line">        app:layout_constrainedWidth=<span class="string">"true"</span></span><br><span class="line">        app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintRight_toRightOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintTop_toBottomOf=<span class="string">"@id/img_avatar"</span></span><br><span class="line">        app:layout_constraintWidth_max=<span class="string">"100dp"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2018/4/22/162ed83c3ca886c9?w=396&h=612&f=png&s=195766" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="Dimensions"><a href="#Dimensions" class="headerlink" title="Dimensions"></a>Dimensions</h2><p>1.1 版本中，当控件的尺寸设置为了 MATCH_CONSTRAINT 时（ 0dp），在设置尺寸上又多了二个新的修饰属性：</p>
+<ul>
+<li>layout_constrainWidth_percent。</li>
+<li>layout_constrainHeight_percent。</li>
+</ul>
+<p>这两个属性的作用就是指定当前控件的宽度或高度是父控件的百分之多少。可设置的值在 0 - 1 之间，1 就是 100%。</p>
+<p>设置头像的宽度占父控件宽度的 80%（父控件占满全屏）例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;ImageView</span><br><span class="line">    android:id=<span class="string">"@+id/img_avatar"</span></span><br><span class="line">    android:layout_width=<span class="string">"0dp"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:scaleType=<span class="string">"centerCrop"</span></span><br><span class="line">    android:src=<span class="string">"@mipmap/ic_avatar"</span></span><br><span class="line">    app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintLeft_toLeftOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintRight_toRightOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintTop_toTopOf=<span class="string">"parent"</span></span><br><span class="line">    app:layout_constraintWidth_percent=<span class="string">"0.8"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2018/4/22/162ed8447e884960?w=510&h=306&f=png&s=129004" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="Margins-and-chains"><a href="#Margins-and-chains" class="headerlink" title="Margins and chains"></a>Margins and chains</h2><p>在 1.1.0-beta4 版本中（已知），为链中的控件设置 marginRight/End 是无效的（个人感觉这应该是个 Bug）。而在 1.1 稳定版中，无论设置右边距还是左边距都是有效果的，会累计计算。并且在计算剩余空间时，会将边距一起考虑。</p>
+<h2 id="Optimizer"><a href="#Optimizer" class="headerlink" title="Optimizer"></a>Optimizer</h2><p>需要知道的是，当我们使用 MATCH_CONSTRAINT 时，ConstraintLayout 将不得不对控件进行 2 次测量，而测量的操作是昂贵的。</p>
+<p>而优化器（Optimizer）的作用就是对 ConstraintLayout 进行优化，对应设置给 ConstraintLauyout 的属性是：</p>
+<ul>
+<li>layout_optimizationLevel。</li>
+</ul>
+<p>可设置的值有：</p>
+<ul>
+<li>none：不应用优化。</li>
+<li>standard：仅优化直接约束和屏障约束（默认的）。</li>
+<li>direct：优化直接约束。</li>
+<li>barrier：优化屏障约束。</li>
+<li>chain：优化链约束（实验）。</li>
+<li>dimensions：优化尺寸测量（实验）。</li>
+</ul>
+<p>在设置值时，可以设置多个，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_optimizationLevel=&quot;direct|barrier|dimensions&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Barrier"><a href="#Barrier" class="headerlink" title="Barrier"></a>Barrier</h2><p>当我们在布局时，有时候就会遇到布局会随着数据的多少而改变大小的情况。以下图为例：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2018/4/22/162ed8497e3f1ee0?w=920&h=964&f=png&s=13933" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>（图片来自官方）</p>
+<p>通过上图就可以发现，当在 A、B 控件的大小都不确定的情况下， View3 以谁作为约束对象都不对。如果以 A 作为约束对象，那么当 B 的宽度过宽时就会被遮挡，同理以 B 作为约束也是如此。</p>
+<p>那么此时，Barrier（屏障）就派上用场了。这是个非常好用的东东，和 GuideLine 一样，它是一个虚拟的 View，对界面是不可见的。目的就是辅助布局。</p>
+<p>对 Barrier 可以使用的属性有：</p>
+<ul>
+<li>barrierDirection：设置 Barrier  所创建的位置。可设置的有：bottom、end、left、right、start、top。</li>
+<li>constraint_referenced_ids：设置 Barrier 引用的控件。可设置多个，设置的方式是：<strong>id, id</strong>。（无需加 @id/）</li>
+<li>barrierAllowsGoneWidgets：默认为 true，即当 Barrier 引用的控件被 GONE 掉时，则 Barrier 默认的创建行为是在已 GONE 掉控件的已解析位置上进行创建。如果设置为 false，则不会将 GONE 掉的控件考虑在内。</li>
+</ul>
+<p>说再多不如看代码，还是以上图为例，来看看 Barrier 是如何解决的：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;android.support.constraint.ConstraintLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    xmlns:app=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span></span><br><span class="line">    android:padding=<span class="string">"16dp"</span></span><br><span class="line">    tools:context=<span class="string">"com.github.airsaid.constraintlayoutdemo.MainActivity"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=<span class="string">"@+id/title"</span></span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        android:text=<span class="string">"Title"</span></span><br><span class="line">        android:textSize=<span class="string">"16sp"</span></span><br><span class="line">        app:layout_constraintStart_toStartOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=<span class="string">"@+id/desc"</span></span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_marginTop=<span class="string">"10dp"</span></span><br><span class="line">        android:text=<span class="string">"This is a descriptive text."</span></span><br><span class="line">        app:layout_constraintStart_toStartOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintTop_toBottomOf=<span class="string">"@id/title"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.constraint.Barrier</span><br><span class="line">        android:id=<span class="string">"@+id/barrier"</span></span><br><span class="line">        android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">        android:layout_height=<span class="string">"match_parent"</span></span><br><span class="line">        app:barrierDirection=<span class="string">"end"</span></span><br><span class="line">        app:constraint_referenced_ids=<span class="string">"title, desc"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=<span class="string">"@+id/content"</span></span><br><span class="line">        android:layout_width=<span class="string">"0dp"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_marginStart=<span class="string">"10dp"</span></span><br><span class="line">        android:text=<span class="string">"This is a piece of content that is very long and long very long and long ..."</span></span><br><span class="line">        app:layout_constraintEnd_toEndOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintStart_toEndOf=<span class="string">"@id/barrier"</span></span><br><span class="line">        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span> /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;/android.support.constraint.ConstraintLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2018/4/22/162ed84c4ff3103f?w=504&h=118&f=png&s=21235" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>另一种情况：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2018/4/22/162ed84e07947d74?w=494&h=98&f=png&s=18509" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>完美解决。</p>
+<h2 id="Group"><a href="#Group" class="headerlink" title="Group"></a>Group</h2><p>Group 的作用就是控制一组控件的可见性。其可使用到的属性为：</p>
+<ul>
+<li>constraint_referenced_ids：指定所引用控件的 id。</li>
+</ul>
+<p>例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.constraint.Group</span><br><span class="line">    android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">    android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">    android:visibility=<span class="string">"gone"</span></span><br><span class="line">    app:constraint_referenced_ids=<span class="string">"title, desc"</span> /&gt;</span><br></pre></td></tr></table></figure>
+<p>如果有多个 Group，是可以同时指定相同的控件的，最终是以 XML 中最后声明的 Group 为准。</p>
+<h2 id="Placeholder"><a href="#Placeholder" class="headerlink" title="Placeholder"></a>Placeholder</h2><p>Placeholder（占位符）是一个虚拟对象，作用和它的名字一样，就是占位。</p>
+<p>当放置好 Placeholder 后，可以通过 setContentId() 方法将占位符变为有效的视图。如果视图已经存在于屏幕上，那么视图将会从原有位置消失。</p>
+<p>除此之外，还可以通过 setEmptyVisibility() 方法设置当视图不存在时占位符的可见性。</p>
+<p>下面的例子演示了占位符的使用，当点击顶部头像时，顶部头像会消失并在占位符处显示：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</span><br><span class="line">&lt;android.support.constraint.ConstraintLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">    xmlns:app=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span><br><span class="line">    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span></span><br><span class="line">    android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">    android:layout_height=<span class="string">"match_parent"</span></span><br><span class="line">    android:padding=<span class="string">"16dp"</span></span><br><span class="line">    tools:context=<span class="string">"com.github.airsaid.constraintlayoutdemo.MainActivity"</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ImageView</span><br><span class="line">        android:id=<span class="string">"@+id/avatar"</span></span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        android:src=<span class="string">"@mipmap/ic_avatar"</span></span><br><span class="line">        app:layout_constraintStart_toStartOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span> /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.constraint.Placeholder</span><br><span class="line">        android:id=<span class="string">"@+id/placeholder"</span></span><br><span class="line">        android:layout_width=<span class="string">"wrap_content"</span></span><br><span class="line">        android:layout_height=<span class="string">"wrap_content"</span></span><br><span class="line">        app:layout_constraintBottom_toBottomOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintEnd_toEndOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintStart_toStartOf=<span class="string">"parent"</span></span><br><span class="line">        app:layout_constraintTop_toTopOf=<span class="string">"parent"</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/android.support.constraint.ConstraintLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://user-gold-cdn.xitu.io/2018/4/22/162ed867e476f52d?w=241&h=343&f=gif&s=24799" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>可以看到 ConstraintLayout 在不断的强大，并且更是推出了优化器来让性能更出色。那么，还有什么理由不用 ConstraintLayout 呢？！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-04-22T13:44:33.730Z" itemprop="dateUpdated">2018-04-22 21:44:33</time>
+</span><br>
+
+
+        
+        原始链接：<a href="/20180422/Android-ConstraintLayout-1.1.0-Detailed/" target="_blank" rel="external">http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://airsaid.github.io">
+            <img src="/img/avatar.jpg" alt="Airsaid">
+            Airsaid
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ConstraintLayout/">ConstraintLayout</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/&title=《Android 约束布局（ConstraintLayout）1.1.0 版详解》 — Airsaid's Blog&pic=http://airsaid.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/&title=《Android 约束布局（ConstraintLayout）1.1.0 版详解》 — Airsaid's Blog&source=
+本篇 ConstraintLayout 讲解版本：1.1.0 稳定版
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 约束布局（ConstraintLayout）1.1.0 版详解》 — Airsaid's Blog&url=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/&via=http://airsaid.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/20180205/Android-ConstraintLayout-Detailed/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android 约束布局（ConstraintLayout）详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'true' == 'true',
+            appId: "dOS2FeHv1Sc7XREAn7Bjp7HS-gzGzoHsz",
+            appKey: "GL3GRksVTYy3wN2u22uid4BN",
+            avatar: "mm",
+            placeholder: "要不要说点什么？",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请我喝咖啡~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Airsaid &copy; 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/&title=《Android 约束布局（ConstraintLayout）1.1.0 版详解》 — Airsaid's Blog&pic=http://airsaid.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/&title=《Android 约束布局（ConstraintLayout）1.1.0 版详解》 — Airsaid's Blog&source=
+本篇 ConstraintLayout 讲解版本：1.1.0 稳定版
+" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 约束布局（ConstraintLayout）1.1.0 版详解》 — Airsaid's Blog&url=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/&via=http://airsaid.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://airsaid.github.io/20180422/Android-ConstraintLayout-1.1.0-Detailed/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
