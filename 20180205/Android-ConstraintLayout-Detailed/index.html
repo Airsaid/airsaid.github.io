@@ -24,50 +24,50 @@
 <meta name="keywords" content="Android,ConstraintLayout">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 约束布局（ConstraintLayout）详解">
-<meta property="og:url" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/index.html">
+<meta property="og:url" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/index.html">
 <meta property="og:site_name" content="Airsaid&#39;s Blog">
 <meta property="og:description" content="本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/警告提示.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/正常情况.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/转换代码.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/蓝图效果.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/删除该控件上所有约束.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/编辑基线.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/添加约束.gif">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/设置默认margin.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/添加约束（约束对象为另一个控件）.gif">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/删除指定的单个约束.gif">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/删除页面所有的约束.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/添加基线约束.gif">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/创建「水平链」.gif">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/创建「垂直链」.gif">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/「水平链」.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/多出来了链条图标.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/spread.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/spread_inside.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/packed.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/weight.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Properties.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Inspector.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/修改控件的margin.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/修改纵横轴.gif">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Inspector中心区域.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/%3E%3E%3E.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/指定大小.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/MatchConstraints.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/约束匹配效果.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/设置宽高比.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/设置宽高比2.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/添加Guideline.png">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Guideline.gif">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/Autoconnect.gif">
-<meta property="og:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/InferConstraints.gif">
-<meta property="og:updated_time" content="2018-02-05T13:21:35.160Z">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/警告提示.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/正常情况.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/转换代码.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/蓝图效果.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/删除该控件上所有约束.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/编辑基线.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/添加约束.gif">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/设置默认margin.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/添加约束（约束对象为另一个控件）.gif">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/删除指定的单个约束.gif">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/删除页面所有的约束.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/添加基线约束.gif">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/创建「水平链」.gif">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/创建「垂直链」.gif">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/「水平链」.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/多出来了链条图标.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/spread.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/spread_inside.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/packed.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/weight.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/Properties.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/Inspector.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/修改控件的margin.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/修改纵横轴.gif">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/Inspector中心区域.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/%3E%3E%3E.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/指定大小.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/MatchConstraints.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/约束匹配效果.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/设置宽高比.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/设置宽高比2.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/添加Guideline.png">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/Guideline.gif">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/Autoconnect.gif">
+<meta property="og:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/InferConstraints.gif">
+<meta property="og:updated_time" content="2018-04-22T13:50:56.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 约束布局（ConstraintLayout）详解">
 <meta name="twitter:description" content="本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解">
-<meta name="twitter:image" content="http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/警告提示.png">
+<meta name="twitter:image" content="http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/警告提示.png">
     
         <link rel="alternate" type="application/atom+xml" title="Airsaid&#39;s Blog" href="/atom.xml">
     
@@ -617,17 +617,17 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-02-05T13:21:35.160Z" itemprop="dateUpdated">2018-02-05 21:21:35</time>
+    最后更新时间：<time datetime="2018-04-22T13:50:56.117Z" itemprop="dateUpdated">2018-04-22 21:50:56</time>
 </span><br>
 
 
         
-        原始链接：<a href="/20180205/Android-ConstraintLayout-Detailed/" target="_blank" rel="external">http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/</a>
+        原始链接：<a href="/20180205/Android-ConstraintLayout-Detailed/" target="_blank" rel="external">http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/</a>
         
     </div>
     
     <footer>
-        <a href="http://airsaid.github.io">
+        <a href="http://dyg8.com">
             <img src="/img/avatar.jpg" alt="Airsaid">
             Airsaid
         </a>
@@ -653,7 +653,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&pic=http://airsaid.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&pic=http://dyg8.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -663,24 +663,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&source=
 本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解
 " data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&via=http://airsaid.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&url=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/&via=http://dyg8.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -823,7 +823,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&pic=http://airsaid.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&pic=http://dyg8.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -833,24 +833,24 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&source=
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/&title=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&source=
 本篇 ConstraintLayout 讲解版本：1.0.2，1.1.x 版本开始新增功能在下篇进行讲解
 " data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/&via=http://airsaid.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 约束布局（ConstraintLayout）详解》 — Airsaid's Blog&url=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/&via=http://dyg8.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -861,7 +861,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/" alt="微信分享二维码">
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://dyg8.com/20180205/Android-ConstraintLayout-Detailed/" alt="微信分享二维码">
 </div>
 
 
