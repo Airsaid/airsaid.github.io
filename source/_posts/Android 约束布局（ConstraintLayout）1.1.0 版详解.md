@@ -12,14 +12,12 @@ tags:
 
 > 本篇 ConstraintLayout 讲解版本：1.1.0 稳定版
 
-
 <!-- more -->
 
-
 ## 前言
-在[上一篇文章](http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/)中，我们对 ConstraintLayout 1.0.2 版进行了详细的了解。而当时说好的 1.1 版本的文章却直到现在才出来，相隔了好久。其实关于 1.1 beta 版的文章早已经写完，但却一直没有发布，这是因为当时担心后面的稳定版会和现有的冲突（事实上的确有），所以一直到本周四，Google 宣布 ConstraintLayout 1.1 正式版发布，于是在周末休息时重新整理发布了这篇文章。
+在[上一篇文章](http://airsaid.github.io/20180205/Android-ConstraintLayout-Detailed/)中，我们对 ConstraintLayout 1.0.2 版进行了详细的了解。而当时说好的 1.1.0 版本的文章却直到现在才出来，相隔了好久。其实关于 1.1.0 beta 版的文章早已写完，但却一直没有发布，这是因为当时担心后面的稳定版会和现有的冲突（事实上的确有），所以一直等到上周四，Google 宣布 ConstraintLayout 1.1.0 稳定版发布，于是在周末休息时重新整理发布了这篇文章。
 
-如果对 ConstraintLayout 不了解，并且还没有观看上篇文章的，强烈建议先观看完上篇文章，因为本篇只是对上篇的补充。如果有遗落或错误，欢迎各位补充和指正。
+如果对 ConstraintLayout 不了解，并且还没有观看上篇文章的，强烈建议先观看完上篇文章，因为本篇只是对上篇的补充。如果有遗漏或错误，欢迎各位补充和指正。
 
 ## 准备
 ``` java
@@ -306,6 +304,6 @@ Placeholder（占位符）是一个虚拟对象，作用和它的名字一样，
 ![](https://user-gold-cdn.xitu.io/2018/4/22/162ed867e476f52d?w=241&h=343&f=gif&s=24799)
 
 ## 总结
-可以看到 ConstraintLayout 在不断的强大，并且更是推出了优化器来让性能更出色。那么，还有什么理由不用 ConstraintLayout 呢？！
+通过本篇文章可以看到， ConstraintLayout 正在不断的强大、优化中，并且更是推出了优化器来让性能更出色。那么，还有什么理由不用 ConstraintLayout 呢？！
 
 
