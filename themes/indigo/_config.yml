@@ -24,18 +24,31 @@ menu:
     text: GitHub
     url: https://github.com/airsaid
     target: _blank
+  telegram:
+    text: Telegram
+    url: https://t.me/airsaids
+    target: _blank
+  link:
+    text: CSDN
+    url: http://blog.csdn.net/airsaid
+    target: _blank
+  heart:
+    text: 掘金
+    url: https://juejin.im/user/576915101532bc00603df0e2
+    target: _blank
   weibo:
+    text: 微博
     url: https://weibo.com/airsaid
     target: _blank
 
 # 你的头像url
 avatar: /img/avatar.jpg
 # avatar link
-avatar_link: /
+avatar_link: https://github.com/airsaid
 # 头像背景图
 brand: /img/brand.jpg
 # favicon
-favicon: /favicon.ico
+favicon: /img/favicon.ico
 
 # email
 email: airsaid1024@gmail.com
